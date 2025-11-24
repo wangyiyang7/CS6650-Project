@@ -1,0 +1,22 @@
+# amplify.yml  ← put this file in your repo root
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd client
+        - npm ci # or yarn install --frozen-lockfile
+    build:
+      commands:
+        - npm run build # whatever your script is (react-scripts build, vite build, etc.)
+  artifacts:
+    baseDirectory: client/dist # ← adjust if your build output is build/, out/, etc.
+    # React CRA        → client/build
+    # Vite             → client/dist
+    # Vue CLI          → client/dist
+    # Next.js static   → client/out
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - "client/node_modules/**/*"
